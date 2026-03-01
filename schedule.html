@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Schedule | The Eight</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; 
+            background: #000; 
+            color: #fff; 
+            line-height: 1.6; 
+        }
+        
+        .header {
+            padding: 60px 20px 40px 20px;
+            text-align: center;
+        }
+        
+        .logo-container {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            perspective: 1000px;
+            margin-bottom: 20px;
+        }
+        
+        .infinity {
+            font-size: 80px;
+            font-weight: 900;
+            color: #D4AF37;
+            line-height: 0.8;
+            font-family: Georgia, serif;
+            transform: rotateX(45deg) scale(1.1);
+            filter: drop-shadow(0 6px 12px rgba(212, 175, 55, 0.3));
+        }
+        
+        .divider {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+            opacity: 0.4;
+        }
+        
+        .eight {
+            font-size: 80px;
+            font-weight: 900;
+            color: #D4AF37;
+            line-height: 0.8;
+            font-family: Georgia, serif;
+        }
+        
+        .tagline {
+            font-size: 14px;
+            letter-spacing: 4px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            font-weight: 300;
+            margin-top: 20px;
+        }
+        
+        .container { 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            padding: 0 20px 80px 20px; 
+        }
+        
+        .intro-section {
+            max-width: 900px;
+            margin: 60px auto;
+            text-align: center;
+        }
+        
+        .intro-title {
+            font-size: clamp(28px, 4vw, 36px);
+            color: #fff;
+            margin-bottom: 30px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .intro-text {
+            font-size: clamp(16px, 2vw, 18px);
+            color: #aaa;
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+        
+        .intro-text strong {
+            color: #D4AF37;
+            font-weight: 600;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            color: #D4AF37;
+            margin: 80px 0 40px 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            margin: 60px 0;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .stat-box {
+            background: #0A0A0A;
+            border: 1px solid #222;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 8px;
+        }
+        
+        .stat-number {
+            font-size: 42px;
+            color: #D4AF37;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.4;
+        }
+        
+        /* Weekly Schedule Grid */
+        .schedule-wrapper {
+            overflow-x: auto;
+            margin: 40px 0;
+        }
+        
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: 140px repeat(5, minmax(160px, 1fr));
+            gap: 2px;
+            background: #222;
+            border: 2px solid #D4AF37;
+            min-width: 900px;
+        }
+        
+        .schedule-header {
+            background: #D4AF37;
+            color: #000;
+            padding: 20px 10px;
+            font-weight: 700;
+            text-align: center;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+        
+        .time-slot {
+            background: #0A0A0A;
+            padding: 20px 12px;
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.4;
+        }
+        
+        .class-slot {
+            background: #1a1a1a;
+            padding: 20px 15px;
+            text-align: center;
+            border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .class-slot:hover {
+            background: #252525;
+            transform: scale(1.02);
+        }
+        
+        .class-math {
+            border-left-color: #4A90E2;
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.12), rgba(74, 144, 226, 0.05));
+        }
+        
+        .class-cs {
+            border-left-color: #50E3C2;
+            background: linear-gradient(135deg, rgba(80, 227, 194, 0.12), rgba(80, 227, 194, 0.05));
+        }
+        
+        .class-econ {
+            border-left-color: #F5A623;
+            background: linear-gradient(135deg, rgba(245, 166, 35, 0.12), rgba(245, 166, 35, 0.05));
+        }
+        
+        .revision-math {
+            border-left-color: #4A90E2;
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.08), rgba(74, 144, 226, 0.02));
+        }
+        
+        .revision-cs {
+            border-left-color: #50E3C2;
+            background: linear-gradient(135deg, rgba(80, 227, 194, 0.08), rgba(80, 227, 194, 0.02));
+        }
+        
+        .revision-econ {
+            border-left-color: #F5A623;
+            background: linear-gradient(135deg, rgba(245, 166, 35, 0.08), rgba(245, 166, 35, 0.02));
+        }
+        
+        .class-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+        
+        .class-type {
+            font-size: 11px;
+            color: #D4AF37;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        
+        .class-duration {
+            font-size: 11px;
+            color: #888;
+            letter-spacing: 0.5px;
+        }
+        
+        .empty-slot {
+            background: #0A0A0A;
+        }
+        
+        .break-slot {
+            background: #0A0A0A;
+            border-left: 4px solid #444;
+        }
+        
+        .lunch-slot {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(212, 175, 55, 0.02));
+            border-left: 4px solid #D4AF37;
+        }
+        
+        /* Legend */
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 30px 0 60px 0;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: #aaa;
+        }
+        
+        .legend-color {
+            width: 30px;
+            height: 20px;
+            border-radius: 3px;
+            border-left: 4px solid;
+        }
+        
+        .legend-math { background: rgba(74, 144, 226, 0.12); border-left-color: #4A90E2; }
+        .legend-cs { background: rgba(80, 227, 194, 0.12); border-left-color: #50E3C2; }
+        .legend-econ { background: rgba(245, 166, 35, 0.12); border-left-color: #F5A623; }
+        
+        /* Highlight boxes */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
+            border: 2px solid #D4AF37;
+            border-radius: 12px;
+            padding: 40px;
+            margin: 60px auto;
+            text-align: center;
+            max-width: 900px;
+        }
+        
+        .highlight-title {
+            font-size: 26px;
+            color: #D4AF37;
+            margin-bottom: 20px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+        
+        .highlight-text {
+            font-size: 17px;
+            color: #fff;
+            line-height: 1.8;
+        }
+        
+        /* Back button */
+        .back-button {
+            display: inline-block;
+            padding: 18px 50px;
+            background: transparent;
+            border: 2px solid #D4AF37;
+            color: #D4AF37;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            margin-top: 40px;
+        }
+        
+        .back-button:hover {
+            background: #D4AF37;
+            color: #000;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin: 60px 0 40px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .schedule-grid {
+                font-size: 11px;
+            }
+            
+            .class-name {
+                font-size: 13px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .legend {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <div class="infinity">∞</div>
+            <div class="divider"></div>
+            <div class="eight">8</div>
+        </div>
+        <p class="tagline">Excellence is Exclusive</p>
+    </div>
+
+    <div class="container">
+        <div class="intro-section">
+            <h1 class="intro-title">Your Complete Academic Day</h1>
+            <p class="intro-text">
+                Each subject receives <strong>6 hours of live instruction per week</strong> (three 130-minute sessions) plus <strong>two 90-minute supervised revision blocks</strong> where teachers are online to answer questions, review work, and provide support.
+            </p>
+            <p class="intro-text">
+                Classes run 8:30 AM - 1:10 PM. After a proper lunch break, supervised revision runs 2:00 PM - 5:30 PM (depending on the day). When your child closes their laptop, <strong>they're done.</strong> Classes complete. Studying complete. Tomorrow prepared.
+            </p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-number">19.5</div>
+                <div class="stat-label">Hours Live Instruction/Week</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">9</div>
+                <div class="stat-label">Hours Supervised Revision/Week</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">8:30 AM</div>
+                <div class="stat-label">Classes Start</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">12:40 PM</div>
+                <div class="stat-label">Done Friday</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">3:40 PM</div>
+                <div class="stat-label">Done (Tue/Wed)</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">5:30 PM</div>
+                <div class="stat-label">Done (Mon/Thu)</div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Your Week at The Eight</h2>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color legend-math"></div>
+                <span>Mathematics (9709)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-cs"></div>
+                <span>Computer Science (9618)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-econ"></div>
+                <span>Economics (9708)</span>
+            </div>
+        </div>
+
+        <div class="schedule-wrapper">
+            <div class="schedule-grid">
+                <div class="schedule-header">Time</div>
+                <div class="schedule-header">Monday</div>
+                <div class="schedule-header">Tuesday</div>
+                <div class="schedule-header">Wednesday</div>
+                <div class="schedule-header">Thursday</div>
+                <div class="schedule-header">Friday</div>
+                
+                <!-- Morning Session 1 -->
+                <div class="time-slot">8:30 AM<br>-<br>10:40 AM</div>
+                <div class="class-slot class-math">
+                    <div class="class-type">Live Class</div>
+                    <div class="class-name">Mathematics</div>
+                    <div class="class-duration">130 min</div>
+                </div>
+                <div class="class-slot class-econ">
+                    <div class="class-type">Live Class</div>
+                    <div class="class-name">Economics</div>
+                    <div class="class-duration">130 min</div>
+                </div>
+                <div class="class-slot class-cs">
+                    <div class="class-type">Live Class</div>
+                    <div class="class-name">Computer Science</div>
+                    <div class="class-duration">130 min</div>
+                </div>
+                <div class="class-slot class-math">
+                    <div class="class-type">Live Class</div>
+                    <div class="class-name">Mathematics</div>
+                    <div class="class-duration">130 min</div>
+                </div>
+                <div class="class-slot class-econ">
+                    <div class="class-type">Live Class</div>
+                    <div class="class-name">Economics</div>
+                    <div class="class-duration">130 min</div>
+                </div>
+                
+                <!-- Break -->
+                <div class="time-slot">10:40 AM<br>-<br>11:00 AM</div>
+                <div class="class-slot break-slot">
+                    <div class="class-duration" style="color: #666;">20 min break</div>
+                </div>
+                <div class="class-slot break-slot">
+                    <div class="class-duration" style="color: #666;">20 min break</div>
+                </div>
+                <div class="class-slot break-slot">
+                    <div class="class-duration" style="color: #666;">20 min break</div>
+                </div>
+                <div class="class-slot break-slot">
+                    <div class="class-duration" style="color: #666;">20 min break</div>
+                </div>
+                <div class="class-slot break-slot">
+                    <div class="class-duration" style="color: #666;">20 min break</div>
+                </div>
+                
+                <!-- Morning Session 2 -->
+                <div class="time-slot">11:00 AM<br>-<br>1:10 PM</div>
+                <div class="class-slot class-cs">
+                    <div class="class-type">Live Class</div>
+                    <div class="class-name">Computer Science</div>
+                    <div class="class-duration">130 min</div>
+                </div>
+                <div class="class-slot class-math">
+                    <div class="class-type">Live Class</div>
+                    <div class="class-name">Mathematics</div>
+                    <div class="class-duration">130 min</div>
+                </div>
+                <div class="class-slot class-econ">
+                    <div class="class-type">Live Class</div>
+                    <div class="class-name">Economics</div>
+                    <div class="class-duration">130 min</div>
+                </div>
+                <div class="class-slot class-cs">
+                    <div class="class-type">Live Class</div>
+                    <div class="class-name">Computer Science</div>
+                    <div class="class-duration">130 min</div>
+                </div>
+                <div class="class-slot revision-econ">
+                    <div class="class-type">Supervised Revision</div>
+                    <div class="class-name">Economics</div>
+                    <div class="class-duration">90 min (45+10+45)</div>
+                </div>
+                
+                <!-- Lunch -->
+                <div class="time-slot">1:10 PM<br>-<br>2:00 PM</div>
+                <div class="class-slot lunch-slot">
+                    <div class="class-name" style="color: #D4AF37;">Lunch Break</div>
+                    <div class="class-duration">50 minutes</div>
+                </div>
+                <div class="class-slot lunch-slot">
+                    <div class="class-name" style="color: #D4AF37;">Lunch Break</div>
+                    <div class="class-duration">50 minutes</div>
+                </div>
+                <div class="class-slot lunch-slot">
+                    <div class="class-name" style="color: #D4AF37;">Lunch Break</div>
+                    <div class="class-duration">50 minutes</div>
+                </div>
+                <div class="class-slot lunch-slot">
+                    <div class="class-name" style="color: #D4AF37;">Lunch Break</div>
+                    <div class="class-duration">50 minutes</div>
+                </div>
+                <div class="class-slot empty-slot" style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05)); border-left: 4px solid #D4AF37;">
+                    <div class="class-name" style="color: #D4AF37; font-size: 20px;">✓ DONE</div>
+                    <div class="class-duration" style="color: #D4AF37; font-weight: 700;">12:40 PM</div>
+                </div>
+                
+                <!-- Afternoon Revision Block 1 -->
+                <div class="time-slot">2:00 PM<br>-<br>3:40 PM</div>
+                <div class="class-slot revision-math">
+                    <div class="class-type">Supervised Revision</div>
+                    <div class="class-name">Mathematics</div>
+                    <div class="class-duration">90 min (45+10+45)</div>
+                </div>
+                <div class="class-slot revision-econ">
+                    <div class="class-type">Supervised Revision</div>
+                    <div class="class-name">Economics</div>
+                    <div class="class-duration">90 min (45+10+45)</div>
+                </div>
+                <div class="class-slot revision-math">
+                    <div class="class-type">Supervised Revision</div>
+                    <div class="class-name">Mathematics</div>
+                    <div class="class-duration">90 min (45+10+45)</div>
+                </div>
+                <div class="class-slot revision-cs">
+                    <div class="class-type">Supervised Revision</div>
+                    <div class="class-name">Computer Science</div>
+                    <div class="class-duration">90 min (45+10+45)</div>
+                </div>
+                <div class="class-slot empty-slot" style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.08)); border-left: 4px solid #D4AF37;">
+                    <div class="class-name" style="color: #D4AF37; font-size: 18px;">FREE</div>
+                    <div class="class-duration" style="color: #888;">Enjoy your weekend</div>
+                </div>
+                
+                <!-- Break between revision blocks -->
+                <div class="time-slot">3:40 PM<br>-<br>3:50 PM</div>
+                <div class="class-slot break-slot">
+                    <div class="class-duration" style="color: #666;">10 min break</div>
+                </div>
+                <div class="class-slot empty-slot">
+                    <div class="class-name" style="color: #D4AF37; font-size: 16px;">✓ Done</div>
+                    <div class="class-duration" style="color: #888;">3:40 PM</div>
+                </div>
+                <div class="class-slot empty-slot">
+                    <div class="class-name" style="color: #D4AF37; font-size: 16px;">✓ Done</div>
+                    <div class="class-duration" style="color: #888;">3:40 PM</div>
+                </div>
+                <div class="class-slot break-slot">
+                    <div class="class-duration" style="color: #666;">10 min break</div>
+                </div>
+                <div class="class-slot empty-slot">
+                    <div class="class-name" style="color: #D4AF37; font-size: 16px;">✓ Done</div>
+                    <div class="class-duration" style="color: #888;">3:40 PM</div>
+                </div>
+                
+                <!-- Afternoon Revision Block 2 -->
+                <div class="time-slot">3:50 PM<br>-<br>5:30 PM</div>
+                <div class="class-slot revision-cs">
+                    <div class="class-type">Supervised Revision</div>
+                    <div class="class-name">Computer Science</div>
+                    <div class="class-duration">90 min (45+10+45)</div>
+                </div>
+                <div class="class-slot empty-slot">
+                    <div class="class-duration" style="color: #555;">—</div>
+                </div>
+                <div class="class-slot empty-slot">
+                    <div class="class-duration" style="color: #555;">—</div>
+                </div>
+                <div class="class-slot revision-econ">
+                    <div class="class-type">Supervised Revision</div>
+                    <div class="class-name">Economics</div>
+                    <div class="class-duration">90 min (45+10+45)</div>
+                </div>
+                <div class="class-slot empty-slot">
+                    <div class="class-duration" style="color: #555;">—</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <div class="highlight-title">Friday: Done by 12:40 PM</div>
+            <div class="highlight-text">
+                Economics class + revision complete by lunchtime. The whole afternoon and evening free. Your weekend starts early.
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <div class="highlight-title">Tuesday/Wednesday: Done by 3:40 PM</div>
+            <div class="highlight-text">
+                Two classes + one revision block. Finish mid-afternoon with time for sports, music, or whatever matters to you.
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <div class="highlight-title">Monday/Thursday: Done by 5:30 PM</div>
+            <div class="highlight-text">
+                Full day: two classes + two revision blocks. Still home earlier than traditional school + homework grind.
+            </div>
+        </div>
+
+        <div class="highlight-box" style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.08)); border-width: 3px;">
+            <div class="highlight-title" style="font-size: 30px;">Weekends: Completely Free</div>
+            <div class="highlight-text" style="font-size: 19px;">
+                Saturday and Sunday off. No homework. No stress. No Sunday night panic. Just life.
+            </div>
+        </div>
+
+        <div class="button-container">
+            <a href="index.html" class="back-button">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

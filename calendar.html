@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE EIGHT - Academic Calendar 2026-2027</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            line-height: 1.6;
+            padding: 60px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .infinity {
+            font-size: 120px;
+            font-weight: 900;
+            color: #D4AF37;
+            line-height: 0.8;
+            font-family: Georgia, serif;
+        }
+
+        .divider {
+            width: 150px;
+            height: 3px;
+            background: #D4AF37;
+        }
+
+        .eight {
+            font-size: 120px;
+            font-weight: 900;
+            color: #D4AF37;
+            line-height: 0.8;
+            font-family: Georgia, serif;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #D4AF37;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .year {
+            font-size: 32px;
+            color: #888;
+            letter-spacing: 3px;
+        }
+
+        /* Calendar Grid */
+        .calendar-grid {
+            display: grid;
+            gap: 40px;
+        }
+
+        .semester {
+            background: #0A0A0A;
+            border: 2px solid #222;
+            padding: 40px;
+            transition: border-color 0.3s ease;
+        }
+
+        .semester:hover {
+            border-color: #D4AF37;
+        }
+
+        .semester-header {
+            border-bottom: 2px solid #D4AF37;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .semester-title {
+            font-size: 32px;
+            color: #D4AF37;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .semester-dates {
+            font-size: 18px;
+            color: #888;
+            letter-spacing: 1px;
+        }
+
+        /* Event Blocks */
+        .events {
+            display: grid;
+            gap: 20px;
+        }
+
+        .event {
+            padding: 20px;
+            border-left: 4px solid #D4AF37;
+            background: #000;
+        }
+
+        .event.break {
+            border-left-color: #666;
+            background: #0A0A0A;
+        }
+
+        .event.exam {
+            border-left-color: #D4AF37;
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .event-type {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .event-title {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .event-dates {
+            font-size: 16px;
+            color: #aaa;
+            font-family: 'Courier New', monospace;
+        }
+
+        .event-description {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        /* Summary Box */
+        .summary {
+            background: #D4AF37;
+            color: #000;
+            padding: 40px;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .summary h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .summary-item {
+            text-align: center;
+        }
+
+        .summary-number {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .summary-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid #222;
+        }
+
+        .footer-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .footer-infinity, .footer-eight {
+            font-size: 60px;
+            color: #D4AF37;
+            font-weight: 900;
+            line-height: 0.8;
+        }
+
+        .footer-divider {
+            width: 80px;
+            height: 2px;
+            background: #D4AF37;
+        }
+
+        .footer-text {
+            color: #666;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 32px; }
+            .year { font-size: 24px; }
+            .infinity, .eight { font-size: 80px; }
+            .divider { width: 100px; }
+            .semester-title { font-size: 24px; }
+            .summary h2 { font-size: 22px; }
+            .summary-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <div class="infinity">∞</div>
+                <div class="divider"></div>
+                <div class="eight">8</div>
+            </div>
+            <h1>Academic Calendar</h1>
+            <div class="year">2026 - 2027</div>
+        </div>
+
+        <!-- Calendar Grid -->
+        <div class="calendar-grid">
+            <!-- Fall Semester 2026 -->
+            <div class="semester">
+                <div class="semester-header">
+                    <div class="semester-title">Fall Semester 2026</div>
+                    <div class="semester-dates">September 7 - December 18, 2026</div>
+                </div>
+                
+                <div class="events">
+                    <div class="event">
+                        <div class="event-type">Semester Start</div>
+                        <div class="event-title">First Day of Instruction</div>
+                        <div class="event-dates">Monday, September 7, 2026</div>
+                        <div class="event-description">
+                            AS-Level and A2-Level cohorts begin. 18 hours/week live instruction commences.
+                        </div>
+                    </div>
+
+                    <div class="event break">
+                        <div class="event-type">Fall Break</div>
+                        <div class="event-title">Mid-Semester Break</div>
+                        <div class="event-dates">Monday, October 19 - Friday, October 23, 2026</div>
+                        <div class="event-description">
+                            No classes. Students rest and review. Teachers available via email for questions.
+                        </div>
+                    </div>
+
+                    <div class="event">
+                        <div class="event-type">Semester End</div>
+                        <div class="event-title">Last Day of Fall Instruction</div>
+                        <div class="event-dates">Friday, December 18, 2026</div>
+                        <div class="event-description">
+                            Fall semester concludes. Winter break begins. Students review independently.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spring Semester 2027 -->
+            <div class="semester">
+                <div class="semester-header">
+                    <div class="semester-title">Spring Semester 2027</div>
+                    <div class="semester-dates">January 3 - April 30, 2027</div>
+                </div>
+                
+                <div class="events">
+                    <div class="event">
+                        <div class="event-type">Semester Start</div>
+                        <div class="event-title">Spring Term Begins</div>
+                        <div class="event-dates">Monday, January 3, 2027</div>
+                        <div class="event-description">
+                            Classes resume. Final push toward AS-Level and A2-Level exams in May/June.
+                        </div>
+                    </div>
+
+                    <div class="event break">
+                        <div class="event-type">Spring Break</div>
+                        <div class="event-title">Mid-Semester Break</div>
+                        <div class="event-dates">Monday, March 8 - Friday, March 12, 2027</div>
+                        <div class="event-description">
+                            No classes. Rest and preparation time before mock exams.
+                        </div>
+                    </div>
+
+                    <div class="event exam">
+                        <div class="event-type">Mock Exams - First Set</div>
+                        <div class="event-title">Full Mock Examination Series 1</div>
+                        <div class="event-dates">Week of March 22, 2027</div>
+                        <div class="event-description">
+                            Full timed mock exams under exam conditions. All three subjects. Feedback provided within one week.
+                        </div>
+                    </div>
+
+                    <div class="event exam">
+                        <div class="event-type">Mock Exams - Second Set</div>
+                        <div class="event-title">Full Mock Examination Series 2</div>
+                        <div class="event-dates">Week of April 19, 2027</div>
+                        <div class="event-description">
+                            Final full mock exams. Last practice before official Cambridge exams. Detailed feedback and exam strategy review.
+                        </div>
+                    </div>
+
+                    <div class="event">
+                        <div class="event-type">Semester End</div>
+                        <div class="event-title">Last Day of Regular Instruction</div>
+                        <div class="event-dates">Thursday, April 30, 2027</div>
+                        <div class="event-description">
+                            Regular classes conclude. Transition to intensive exam preparation and support sessions.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- May 2027 Exam Preparation -->
+            <div class="semester">
+                <div class="semester-header">
+                    <div class="semester-title">Exam Preparation Period</div>
+                    <div class="semester-dates">May 2027</div>
+                </div>
+                
+                <div class="events">
+                    <div class="event exam">
+                        <div class="event-type">Intensive Support</div>
+                        <div class="event-title">Pre-Exam Support Sessions</div>
+                        <div class="event-dates">Throughout May 2027</div>
+                        <div class="event-description">
+                            Six 2-hour support sessions per subject (Math, Computer Science, Economics).
+                            <br><br>
+                            <strong>Total: 18 hours of intensive exam preparation.</strong>
+                            <br><br>
+                            Focus: Last-minute topics, exam technique, question practice, and confidence building.
+                            Flexible scheduling around official exam dates.
+                        </div>
+                    </div>
+
+                    <div class="event exam">
+                        <div class="event-type">Official Exams</div>
+                        <div class="event-title">Cambridge A-Level Examinations</div>
+                        <div class="event-dates">May/June 2027 (Cambridge Schedule)</div>
+                        <div class="event-description">
+                            Students sit official Cambridge AS-Level and A2-Level exams at authorized examination centers.
+                            Teachers available for support and questions throughout exam period.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Box -->
+        <div class="summary">
+            <h2>Academic Year at a Glance</h2>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="summary-number">34</div>
+                    <div class="summary-label">Instructional Weeks</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-number">18</div>
+                    <div class="summary-label">Hours/Week Live Class</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-number">2</div>
+                    <div class="summary-label">Full Mock Exam Series</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-number">18</div>
+                    <div class="summary-label">Hours Exam Prep (May)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-logo">
+                <div class="footer-infinity">∞</div>
+                <div class="footer-divider"></div>
+                <div class="footer-eight">8</div>
+            </div>
+            <div class="footer-text">
+                THE EIGHT © 2026 | ACADEMIC CALENDAR 2026-2027
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE EIGHT | Excellence is Exclusive</title>
+    <meta name="description" content="Elite Cambridge A-Level preparation in Math, Computer Science, and Economics. 8 students per cohort.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #000; color: #fff; line-height: 1.6; }
+        .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; padding: 40px 20px; }
+        .logo-container { display: flex; flex-direction: column; align-items: center; gap: 15px; perspective: 1000px; animation: fadeIn 1.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .infinity { font-size: clamp(120px, 20vw, 180px); font-weight: 900; color: #D4AF37; line-height: 0.8; font-family: Georgia, serif; transform: rotateX(45deg) scale(1.1); filter: drop-shadow(0 8px 16px rgba(212, 175, 55, 0.35)); }
+        .divider { width: clamp(150px, 50vw, 220px); height: 2px; background: linear-gradient(90deg, transparent, #D4AF37, transparent); opacity: 0.4; margin: 10px 0; }
+        .eight { font-size: clamp(120px, 20vw, 180px); font-weight: 900; color: #D4AF37; line-height: 0.8; font-family: Georgia, serif; }
+        .tagline { margin-top: 30px; font-size: clamp(14px, 2.5vw, 18px); letter-spacing: 4px; color: rgba(255, 255, 255, 0.7); text-transform: uppercase; font-weight: 300; }
+        .cta-button { margin-top: 50px; padding: 18px 50px; background: #D4AF37; color: #000; text-decoration: none; font-size: 16px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s ease; display: inline-block; }
+        .cta-button:hover { background: #fff; transform: translateY(-2px); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        section { padding: 100px 20px; }
+        .dark-section { background: #0A0A0A; }
+        .section-title { font-size: clamp(32px, 5vw, 48px); text-align: center; margin-bottom: 20px; color: #D4AF37; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; }
+        .section-subtitle { text-align: center; font-size: clamp(16px, 2.5vw, 20px); color: #888; margin-bottom: 60px; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin: 60px 0; }
+        .stat { text-align: center; padding: 40px 20px; background: #0A0A0A; border: 1px solid #222; }
+        .stat-number { font-size: clamp(48px, 8vw, 72px); color: #D4AF37; font-weight: 900; line-height: 1; margin-bottom: 15px; }
+        .stat-label { font-size: 14px; color: #888; text-transform: uppercase; letter-spacing: 2px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 60px; }
+        .card { background: #000; border: 1px solid #222; padding: 40px; transition: all 0.3s ease; }
+        .card:hover { border-color: #D4AF37; transform: translateY(-5px); }
+        .card-icon { font-size: 60px; color: #D4AF37; margin-bottom: 20px; text-align: center; }
+        .card-title { font-size: 24px; color: #D4AF37; margin-bottom: 15px; text-align: center; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
+        .card-text { color: #aaa; text-align: center; line-height: 1.8; }
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; align-items: center; margin-top: 60px; }
+        .col-content h3 { font-size: 28px; color: #D4AF37; margin-bottom: 20px; letter-spacing: 2px; }
+        .col-content p { color: #aaa; line-height: 1.8; margin-bottom: 15px; }
+        .col-content ul { list-style: none; margin: 20px 0; }
+        .col-content li { color: #aaa; padding: 10px 0; padding-left: 30px; position: relative; }
+        .col-content li:before { content: "✓"; position: absolute; left: 0; color: #D4AF37; font-weight: 900; }
+        .highlight-box { background: #D4AF37; color: #000; padding: 40px; margin: 60px 0; text-align: center; }
+        .highlight-box h3 { font-size: 32px; font-weight: 900; margin-bottom: 15px; letter-spacing: 2px; }
+        .highlight-box p { font-size: 18px; line-height: 1.8; }
+        .standards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 60px; }
+        @media (max-width: 768px) { .standards-grid { grid-template-columns: 1fr; } }
+        .standard-box { padding: 40px; border: 2px solid #D4AF37; background: #0A0A0A; }
+        .reject-box { padding: 40px; border: 2px solid #666; background: #0A0A0A; }
+        .standard-box h3 { font-size: 24px; margin-bottom: 20px; letter-spacing: 2px; text-transform: uppercase; color: #D4AF37; }
+        .reject-box h3 { font-size: 24px; margin-bottom: 20px; letter-spacing: 2px; text-transform: uppercase; color: #666; }
+        .price-box { max-width: 600px; margin: 60px auto; padding: 60px; background: #0A0A0A; border: 3px solid #D4AF37; text-align: center; }
+        .price { font-size: 72px; color: #D4AF37; font-weight: 900; margin: 20px 0; }
+        .price-label { font-size: 18px; color: #888; text-transform: uppercase; letter-spacing: 2px; }
+        .price-details { margin-top: 30px; color: #aaa; line-height: 2; }
+        .faq-item { background: #0A0A0A; border: 1px solid #222; padding: 40px; margin-bottom: 30px; }
+        .faq-question { font-size: 24px; color: #D4AF37; margin-bottom: 20px; font-weight: 700; letter-spacing: 1px; }
+        .faq-answer { color: #aaa; line-height: 1.9; font-size: 16px; }
+        .faq-answer p { margin-bottom: 15px; }
+        .faq-answer strong { color: #D4AF37; }
+        .app-steps { max-width: 800px; margin: 60px auto; }
+        .app-step { background: #0A0A0A; border-left: 4px solid #D4AF37; padding: 30px; margin-bottom: 30px; }
+        .app-step-number { font-size: 14px; color: #D4AF37; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; }
+        .app-step-title { font-size: 22px; color: #fff; margin-bottom: 15px; font-weight: 600; }
+        .app-step-desc { color: #aaa; line-height: 1.8; }
+        footer { background: #000; padding: 60px 20px; text-align: center; border-top: 1px solid #222; }
+        .footer-logo { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 30px; perspective: 600px; }
+        .footer-infinity { font-size: 60px; color: #D4AF37; font-weight: 900; line-height: 0.8; transform: rotateX(45deg) scale(1.1); filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.3)); }
+        .footer-eight { font-size: 60px; color: #D4AF37; font-weight: 900; line-height: 0.8; }
+        .footer-divider { width: 80px; height: 2px; background: linear-gradient(90deg, transparent, #D4AF37, transparent); opacity: 0.4; }
+        .footer-text { color: #666; font-size: 14px; letter-spacing: 2px; margin-top: 20px; }
+        .footer-email { color: #D4AF37; text-decoration: none; margin-top: 20px; display: inline-block; letter-spacing: 1px; }
+        .footer-email:hover { color: #fff; }
+        .footer-links { margin-top: 30px; }
+        .footer-links a { color: #888; text-decoration: none; margin: 0 15px; font-size: 14px; letter-spacing: 1px; transition: color 0.3s ease; }
+        .footer-links a:hover { color: #D4AF37; }
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="logo-container">
+            <div class="infinity">∞</div>
+            <div class="divider"></div>
+            <div class="eight">8</div>
+        </div>
+        <p class="tagline">Excellence is Exclusive</p>
+        <a href="#apply" class="cta-button">Apply Now</a>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">We Only Take Eight</h2>
+            <p class="section-subtitle">8 students per cohort. Cambridge A-Levels in Math, Computer Science, and Economics. Built for university and beyond.</p>
+            <div class="stats">
+                <div class="stat"><div class="stat-number">8</div><div class="stat-label">Students Per Cohort</div></div>
+                <div class="stat"><div class="stat-number">3</div><div class="stat-label">Subjects</div></div>
+                <div class="stat"><div class="stat-number">18</div><div class="stat-label">Hours/Week Live</div></div>
+                <div class="stat"><div class="stat-number">22K</div><div class="stat-label">TND / Year</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="dark-section">
+        <div class="container">
+            <h2 class="section-title">Why Now?</h2>
+            <p class="section-subtitle">2026 is the year everything changes. AI is disrupting the labor market. Traditional education is unprepared.</p>
+            <div class="two-col">
+                <div class="col-content">
+                    <h3>The Problem</h3>
+                    <p>The labor market is changing fast. Routine work is being automated—but those who understand how to build, analyze, and lead with technology will thrive.</p>
+                    <p>Parents are asking: Is €10K-30K per year worth it for mixed-ability classrooms, bloated administration, and a curriculum designed for 2015, not 2030?</p>
+                </div>
+                <div class="col-content">
+                    <h3>Our Answer</h3>
+                    <p>We don't prepare students for jobs that might disappear. We prepare them to thrive in uncertainty.</p>
+                    <p>Math, Computer Science, and Economics aren't just subjects—they're the tools to build and navigate an AI-driven world.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">Why Math, CS & Economics?</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon">💻</div>
+                    <h3 class="card-title">Computer Science</h3>
+                    <p class="card-text">Understanding AI, algorithms, and automation. Building technology instead of being replaced by it.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">∑</div>
+                    <h3 class="card-title">Mathematics</h3>
+                    <p class="card-text">Analytical thinking and problem-solving. Foundation for all STEM fields. The language of AI.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📈</div>
+                    <h3 class="card-title">Economics</h3>
+                    <p class="card-text">Understanding systems, incentives, and markets. Entrepreneurial thinking for the future.</p>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <h3>Maximum Optionality</h3>
+                <p>Students can pursue engineering, finance, tech, policy, or entrepreneurship—or careers that haven't been invented yet.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="dark-section">
+        <div class="container">
+            <h2 class="section-title">The Model</h2>
+            <div class="two-col">
+                <div class="col-content">
+                    <h3>What You Get</h3>
+                    <ul>
+                        <li>18 hours/week live instruction via Zoom</li>
+                        <li>9 hours/week teacher-supervised revision1</li>
+                        <li>Expert teachers (5+ years experience)</li>
+                        <li>Small cohorts (8 students max)</li>
+                        <li>Cambridge A-Level qualification</li>
+                        <li>No commuting required</li>
+                    </ul>
+                </div>
+                <div class="col-content">
+                    <h3>What You Don't Pay For</h3>
+                    <ul>
+                        <li>Bloated administration</li>
+                        <li>Campus facilities you don't use</li>
+                        <li>Mandatory activities</li>
+                        <li>Mixed-ability classrooms</li>
+                        <li>Wasted time and money</li>
+                    </ul>
+                </div>
+            </div>
+<div class="highlight-box">
+    <h3 style="font-size: 24px; margin-bottom: 25px; line-height: 1.3;">Traditional school: Get home at 5 PM exhausted facing 3 hours of unsupervised homework.</h3>
+    <h3 style="font-size: 24px; margin-bottom: 25px; line-height: 1.3;">The Eight: Finish by 5:30 PM twice a week, the other three days by 3:40 PM. Classes done. Studying done. Tomorrow prepared. Evenings free.</h3>
+    <p style="font-size: 22px; line-height: 1.7; margin-bottom: 30px; font-weight: 600;">Finish Friday at 12:40 PM. Homework done. Studying done. The satisfaction of a hard week's work behind you. Your weekend? Completely yours.</p>
+    <p style="font-size: 19px; line-height: 1.8; margin-bottom: 35px;">Your child learns discipline during the day. You get your evenings back. They get their childhood back.</p>
+    <a href="schedule.html" style="display: inline-block; padding: 20px 50px; background: #000; color: #D4AF37; text-decoration: none; font-size: 16px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; border: 3px solid #000; transition: all 0.3s ease;">SEE WHAT A DAY LOOKS LIKE</a>
+</div>
+            
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">Why Parents Choose The Eight</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-title">1/3 to 1/5 The Cost</div>
+                    <p class="card-text">International schools: €10K-30K/year. Our program: TND22K/year for all three subjects.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">Proven Results</div>
+                    <p class="card-text">Our students from last year are now at university. Small cohorts mean every student gets attention.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">Smart Allocation</div>
+                    <p class="card-text">Save €10K+ over two years. Invest it in conservatory-level music or professional sports coaching.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">No Bloat</div>
+                    <p class="card-text">No mandatory assemblies. No facilities you don't use. Just academics, done exceptionally well.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">Future-Proof</div>
+                    <p class="card-text">Math, CS, and Economics are skills that matter in 2030 and beyond.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">Elite Without Waste</div>
+                    <p class="card-text">Cambridge A-Levels, expert teachers, small cohorts. Everything that matters.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="dark-section">
+        <div class="container">
+            <h2 class="section-title">We Are Not For Everyone</h2>
+            <p class="section-subtitle">Excellence requires standards. We're selective because we're serious.</p>
+            <div class="standards-grid">
+                <div class="standard-box">
+                    <h3>Who We Accept</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 12px 0; color: #aaa;">✓ A's and B's on IGCSE exams</li>
+                        <li style="padding: 12px 0; color: #aaa;">✓ Self-motivated and disciplined</li>
+                        <li style="padding: 12px 0; color: #aaa;">✓ Clear academic goals</li>
+                        <li style="padding: 12px 0; color: #aaa;">✓ Strong work ethic</li>
+                        <li style="padding: 12px 0; color: #aaa;">✓ Involved parents</li>
+                    </ul>
+                </div>
+                <div class="reject-box">
+                    <h3>Who We Don't</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 12px 0; color: #666;">✗ C's or below on IGCSEs</li>
+                        <li style="padding: 12px 0; color: #666;">✗ Need constant supervision</li>
+                        <li style="padding: 12px 0; color: #666;">✗ Unclear about goals</li>
+                        <li style="padding: 12px 0; color: #666;">✗ Not ready for rigor</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight-box" style="margin-top: 60px;">
+                <h3>We Don't Differentiate. We Focus.</h3>
+                <p>One standard: excellence. One pace: fast. One goal: straight A's on Cambridge A-Levels.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">The Investment</h2>
+            <div class="price-box">
+                <div class="price-label">Annual Program Cost</div>
+                <div class="price">TND22K</div>
+                <div class="price-label">22,000 TND Per Year | All Three Subjects</div>
+                <div class="price-details">
+                    <p><strong>Includes:</strong></p>
+                    <p>18 hours/week live instruction</p>
+                    <p>Expert teachers (5+ years experience)</p>
+                    <p>Small cohorts (8 students max)</p>
+                    <p>Exam registration support</p>
+                    <p style="margin-top: 30px; font-size: 14px; color: #666;">+ Exam fees (~€400/year)</p>
+                </div>
+            </div>
+            <div class="two-col" style="margin-top: 80px;">
+                <div class="col-content">
+                    <h3>Compare</h3>
+                    <p><strong>International School:</strong><br>€10K-30K per year<br>+ fees, commuting, uniforms, etc.</p>
+                    <p style="margin-top: 20px;"><strong>The Eight:</strong><br>TND22K per year + exam fees (€400)</p>
+                </div>
+                <div class="col-content">
+                    <h3>Invest the Difference</h3>
+                    <p>Conservatory music: €4K/year</p>
+                    <p>Professional sports coaching: €3K/year</p>
+                    <p>Coding bootcamps: €2K/year</p>
+                    <p style="margin-top: 20px;"><strong>Still €10K+ cheaper than international school.</strong></p>
+                </div>
+            </div>
+<div style="text-align: center; margin-top: 60px;">
+    <a href="calendar.html" class="cta-button" style="display: inline-block; margin: 0 10px 20px 10px;">VIEW ACADEMIC CALENDAR</a>
+    <a href="about.html" class="cta-button" style="display: inline-block; margin: 0 10px 20px 10px;">ABOUT US</a>      
+    <a href="schedule.html" class="cta-button" style="display: inline-block; margin: 0 10px 20px 10px;">VIEW WEEKLY SCHEDULE</a>
+</div>
+            
+        </div>
+    </section>
+
+    <section class="dark-section">
+        <div class="container">
+            <h2 class="section-title">Common Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question">Do you need a high school diploma to be admitted into a university?</div>
+                <div class="faq-answer">
+                    <p><strong>No.</strong> We've successfully placed students at Russell Group universities in the UK, leading American universities, and English-taught bachelor's programs across Europe (Holland, Italy, Spain, France, Germany, Czech Republic, Poland).</p>
+                    <p>Major universities actively welcome homeschooled students with strong A-Level results. Research shows homeschoolers often score higher on standardized tests and achieve competitive admission rates.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What about supervision during the day?</div>
+                <div class="faq-answer">
+                    <p><strong>This program isn't for students who need constant supervision—it's for students who are ready for more.</strong></p>
+                    <p>Our students are academically prepared (A's and B's on IGCSEs) and personally mature. They manage their time, complete their work, and take responsibility.</p>
+                    <p><strong>This is actually an advantage:</strong> Your child learns independence while still living at home. It's the perfect transition before university—when they'll have complete freedom anyway.</p>
+                    <p>If your child isn't ready for self-directed study, they're not ready for this program.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Isn't online learning inferior to in-person?</div>
+                <div class="faq-answer">
+                    <p><strong>Not when done right.</strong></p>
+                    <p>Our model isn't "watch videos and figure it out yourself." It's 18 hours per week of live, interactive instruction with expert teachers in small cohorts of 8 students.</p>
+                    <p><strong>We also embrace the latest learning tools</strong>—AI study assistants, interactive notebooks, adaptive platforms—tools that traditional schools ban but that students will use throughout their careers. We don't fear technology; we teach students to master it.</p>
+                    <p><strong>The result?</strong> No time wasted on classroom management, no pace held back by unmotivated students, no commuting. Just focused teaching with students who are ready.</p>
+                    <p><strong>We proved this works last year—our students are now at university.</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="apply">
+        <div class="container">
+            <h2 class="section-title">Apply for Academic Year 2026/2027</h2>
+            <p class="section-subtitle">We review every application personally. Acceptance is not guaranteed.</p>
+            <div class="app-steps">
+                <div class="app-step">
+                    <div class="app-step-number">Step 1</div>
+                    <div class="app-step-title">Submit Online Application</div>
+                    <div class="app-step-desc">Complete the application form with student information, IGCSE scores, and A-Level scores (for Year 13 applicants).</div>
+                </div>
+                <div class="app-step">
+                    <div class="app-step-number">Step 2</div>
+                    <div class="app-step-title">Student Essay (250 words)</div>
+                    <div class="app-step-desc">We need to know if you're ready for our program. What motivates you? Are you prepared for self-directed study? How will you build your social network outside of traditional school?</div>
+                </div>
+                <div class="app-step">
+                    <div class="app-step-number">Step 3</div>
+                    <div class="app-step-title">Parent Statement</div>
+                    <div class="app-step-desc">What are your expectations and how will you support your child's success in A-Level preparation?</div>
+                </div>
+                <div class="app-step">
+                    <div class="app-step-number">Step 4</div>
+                    <div class="app-step-title">Final Interview</div>
+                    <div class="app-step-desc">Final stage of the selection process is a Zoom call with parents and student.</div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 60px;">
+                <a href="https://tally.so/r/J9lrDX" class="cta-button">APPLY NOW</a>
+                <p style="color: #666; font-size: 14px; margin-top: 20px; letter-spacing: 1px;">Applications open April 2026</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="dark-section">
+        <div class="container">
+            <h2 class="section-title">∞ ÷ 8 = ∞</h2>
+            <p class="section-subtitle" style="font-size: 20px; max-width: 900px;">Infinity divided by eight equals infinity.</p>
+            <div style="max-width: 800px; margin: 60px auto; text-align: center; color: #aaa; line-height: 2; font-size: 18px;">
+                <p>Every student walks in with infinite potential. Unlimited futures. Boundless capabilities.</p>
+                <p style="margin-top: 30px;">We don't diminish that by admitting hundreds. We amplify it by selecting eight.</p>
+                <p style="margin-top: 40px; color: #D4AF37; font-size: 24px; font-weight: 700;">Your potential doesn't shrink because you're one of eight.<br>It expands because you're surrounded by seven others who are just as driven.</p>
+                <p style="margin-top: 40px;">This is the mathematics of excellence.</p>
+                <p style="margin-top: 10px; color: #D4AF37; font-size: 20px;">This is The Eight.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">
+            <div class="footer-infinity">∞</div>
+            <div class="footer-divider"></div>
+            <div class="footer-eight">8</div>
+        </div>
+        <div style="margin-top: 30px;">
+<a href="mailto:info@8edu.co.uk" class="footer-email">info@8edu.co.uk</a>
+            
+        </div>
+        <div class="footer-links">
+            <a href="calendar.html">Academic Calendar</a>
+            <a href="#apply">Apply</a>
+            <a href="about.html">About Us</a>
+        </div>
+        <div class="footer-text" style="margin-top: 40px;">THE EIGHT © 2026 | ELITE A-LEVEL PREPARATION<br>TUNIS, TUNISIA</div>
+        <div class="footer-te
